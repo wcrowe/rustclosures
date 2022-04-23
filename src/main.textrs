@@ -1,0 +1,38 @@
+#![allow(unused_imports, dead_code)]
+
+fn add_five<F>(func: F)  // use Fn
+where
+    F: Fn(i32),
+{
+    func(5)
+}
+
+fn add_six<F>(mut func: F)  // use Fn
+where
+    F: FnMut(i32),
+{
+    func(6)
+}
+
+fn main() {
+    let num1 = 6;
+    add_five(|x| println!("{}", num1 + x));
+    let mut num2 = 6;
+    add_six(|x| { num2 +=x ;println!("{}", num1 + x)});
+    /*  3 traits
+    //Fn Trait
+    let mut str1 = "The quick brown fox".to_string();
+    let clzr1 = |x| println!("{} {}", str1, x);
+    clzr1("jumps over the lazy dog");
+
+    //FnMut Trait
+    let mut clzr2 = |x| str1.push_str(x);
+    clzr2(" jumps over the lazy dog");
+    println!("{}",str1);
+
+    //FnOnce Trait
+    let clzr3 = || drop(str1);
+    clzr3();
+    //println!("{}",str1);  //Fail because it was dropped
+    */
+}
